@@ -17,6 +17,11 @@ if($accesoBD != null){
         if($resultado instanceof mysqli_result){
             $id_plant = $resultado->fetch_array()['ID_PLANT'];
         }
+        if($id_plant == NULL){
+            $json = array( "COD_SALIDA" => "FALSE" ); //FALSE
+            echo json_encode($json,JSON_PRETTY_PRINT);
+            exit();
+        }
         
         $cantidad = $_GET['CANTIDAD'];
         $precio = $_GET['PRECIO'];
@@ -24,7 +29,7 @@ if($accesoBD != null){
         $color = $_GET['COLOR'];
         $fecha = $_GET['FECHA'];
         
-        $id = generarId($id_plant,$fecha,$accesoBD);
+        $id = generarIdVenta($id_plant,$fecha,$accesoBD);
         
 
         $consulta = "INSERT INTO VENTA(ID_VENTA,KG,PRECIO,TAMANIO,COLOR,FECHA,ID_PLANT)"
@@ -47,7 +52,7 @@ if($accesoBD != null){
     
 }
 
-function generarId($id_plant,$fecha,$accesoBD){
+function generarIdVenta($id_plant,$fecha,$accesoBD){
     if($accesoBD instanceof mysqli){
         $i = 1;
         $idVenta = $fecha . "-" . $i;
