@@ -10,6 +10,8 @@ if($accesoBD != null && isset($_GET['ID_FINCA'])){
     
     ///SELECT * FROM EXPLOTACION WHERE ID_FINCA = 'MAZARULES' 
     ////AND ID_EXPLOTACION IN (SELECT ID_EXPLOTACION FROM PLANTACION WHERE F_FIN IS NULL OR F_FIN>=SYSDATE())
+    
+    //Explotaciones con plantacion activa
     $consulta = "SELECT * FROM EXPLOTACION WHERE ID_FINCA = '" . $finca ."'"
             . " AND ID_EXPLOTACION IN (SELECT ID_EXPLOTACION FROM PLANTACION WHERE F_FIN IS NULL OR F_FIN>=SYSDATE())";
     
